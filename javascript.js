@@ -1,9 +1,13 @@
-//let string = ("RocK");
-
-let string = prompt("Choose your weapon", "")
-
+// let string = ("Rock");
+let string = prompt("Choose your weapon", "rock")
 let playerSelection = string.toLowerCase();
+// let computerSelection = ("scissors");
+
 let computerSelection = getComputerChoice();
+let winMatch = ("You Win!");  
+let loseMatch = ("You Lose!");
+let playerCounter = 0;
+let computerCounter = 0;
 
 function getComputerChoice () {
   let randomOutcome = Math.floor(Math.random() * 3);
@@ -18,25 +22,58 @@ function getComputerChoice () {
   }
 }
 
-function letRounds (playerSelection, computerSelection) {
+function playRound () {
+  let computerSelection = getComputerChoice();
 if (playerSelection == "rock" && computerSelection === "rock" ||
     playerSelection == "paper" && computerSelection === "paper" ||
     playerSelection == "scissors" && computerSelection === "scissors") {
   return ("It's a tie!");
     } else if (playerSelection == "rock" && computerSelection === "paper") {
-    return ("You Lose! Paper beats Rock");
+      return (`${loseMatch} Paper beats Rock`);
     } else if (playerSelection == "rock" && computerSelection === "scissors") {
-      return ("You Win! Rock beats Scissors");
+      return (`${winMatch} Rock beats Scissors`);
     } else if (playerSelection == "paper" && computerSelection === "rock") {
-      return ("You Win! Paper beats Rock");
+      return (`${winMatch} Paper beats Rock`);
     } else if (playerSelection == "paper" && computerSelection === "scissors") {
-      return ("You Lose! Scissors beat Paper");
+      return (`${loseMatch} Scissors beat Paper`);
     } else if (playerSelection == "scissors" && computerSelection === "rock") {
-      return ("You Lose! Rock beats Scissors");
+      return (`${loseMatch} Rock beats Scissors`);
     } else if (playerSelection == "scissors" && computerSelection === "paper") {
-      return ("You Win! Scissors beat Paper");
+      return (`${winMatch} Scissors beat Paper`);
   } else {
     console.log("Did not work, try again");
  } 
 }
-console.log(letRounds(playerSelection, computerSelection));
+
+function game() {
+  console.log(playRound());
+switch (playRound(playerSelection, computerSelection)) {
+  case `${winMatch} Rock beats Scissors`:
+  case `${winMatch} Paper beats Rock`:
+  case `${winMatch} Scissors beat Paper`:
+  return playerCounter++;
+  break;
+  case `${loseMatch} Rock beats Scissors`:
+  case `${loseMatch} Paper beats Rock`:
+  case `${loseMatch} Scissors beat Paper`:
+return computerCounter++;
+  break;
+  case "It's a tie!":
+  break;
+  case playerCounter === 5:
+    return ("Winner!");
+  break;
+  case computerCounter === 5:
+    return ("loser!");
+  break;
+}
+}
+
+function fiveGames() {
+  game();
+  game();
+  game();
+  game();
+  game();
+}
+fiveGames();
